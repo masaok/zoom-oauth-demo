@@ -83,6 +83,34 @@ app.get('/', (req, res) => {
 
           // TODO: Try another call
           // TODO: Get to another call to work in the Zoom API playground
+
+          // TODO: List meetings
+          // https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetings
+          // Invalid access token, does not contain scopes: [zms:meeting:read, meeting:read:admin, zms:meeting:write, meeting:write:admin]
+
+          request
+            .get(
+              'https://api.zoom.us/v2/users/' +
+                process.env.userID +
+                '/meetings',
+              (error, response, body) => {
+                if (error) {
+                  console.log('API Response Error: ', error)
+                } else {
+                  body = JSON.parse(body)
+                  // Display response in console
+                  console.log('API call ', body)
+                  // Display response in browser
+                  var JSONResponse =
+                    '<pre><code>' +
+                    JSON.stringify(body, null, 2) +
+                    '</code></pre>'
+
+                  console.log(JSONResponse)
+                }
+              }
+            )
+            .auth(null, null, true, body.access_token)
         } else {
           // Handle errors, something's gone wrong!
         }
