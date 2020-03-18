@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 
     request
       .post(url, (error, response, body) => {
+        console.log(body)
         // Parse response to JSON
         body = JSON.parse(body)
 
@@ -79,6 +80,9 @@ app.get('/', (req, res) => {
               }
             })
             .auth(null, null, true, body.access_token)
+
+          // TODO: Try another call
+          // TODO: Get to another call to work in the Zoom API playground
         } else {
           // Handle errors, something's gone wrong!
         }
